@@ -2,11 +2,27 @@
 
 {% block content %}
 
+
 <div class="display containter">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
-      <h1>Here's Your Weather for {{ city|capitalize }}</h1>
+      <h1 class="big">Here's Your Weather for {{ city|capitalize }}</h1>
+    {% if weather.weather_data.weather.0.main in ['Rain','Drizzle'] %}
+      <img class="weather_icon" src="/static/img/rain.png">
+    {% elif weather.weather_data.weather.0.main in ['Mist', 'Haze', 'Smoke'] %}
+      <img class="weather_icon" src="/static/img/fog.png">
+    {% elif weather.weather_data.weather.0.main == 'Clouds' %}
+      <img class="weather_icon" src="/static/img/clouds.png">
+    {% elif weather.weather_data.weather.0.main == 'Clear' %}
+      <img class="weather_icon" src="/static/img/clouds.png">
+    {% elif weather.weather_data.weather.0.main == 'Snow' %}
+      <img class="weather_icon" src="/static/img/clouds.snow">
+    {% elif weather.weather_data.weather.0.main == 'Storm' %}
+      <img class="weather_icon" src="/static/img/clouds.storm">
+    <!-- {% else %} -->
+    {% endif %}
     </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12">
       <ul class="centered">
         <li>Temp:&nbsp;{{weather.celcius()|round}}&#8451;</li>
@@ -17,22 +33,9 @@
     </div>
   </div>
 
-  {% if weather.weather_data.weather.0.main in ['Rain','Drizzle'] %}
-    <img class="weather_icon" src="/static/img/rain.png">
-  {% elif weather.weather_data.weather.0.main in ['Mist', 'Haze', 'Smoke'] %}
-    <img class="weather_icon" src="/static/img/fog.png">
-  {% elif weather.weather_data.weather.0.main == 'Clouds' %}
-    <img class="weather_icon" src="/static/img/clouds.png">
-  {% elif weather.weather_data.weather.0.main == 'Clear' %}
-    <img class="weather_icon" src="/static/img/clouds.png">
-  {% elif weather.weather_data.weather.0.main == 'Snow' %}
-    <img class="weather_icon" src="/static/img/clouds.snow">
-  {% elif weather.weather_data.weather.0.main == 'Storm' %}
-    <img class="weather_icon" src="/static/img/clouds.storm">
-  <!-- {% else %} -->
-  {% endif %}
+
     <div>
-      <button type="link" class="button btn btn-primary" required name="history"><a href="/history/history?city={{ city }}">Last Five Reports</a></button>
+      <a class="button btn btn-primary" href="/history/history?city={{ city }}">Last Five Reports</a>
     </div>
 
 
