@@ -1,0 +1,72 @@
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.display {
+  width: 50%;
+  display: block;
+  margin: 10% auto 0 auto;
+}
+.display h1 {
+  font-size: 2.5em;
+}
+h1, h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  color: lightblue;
+}
+
+.centered {
+  width: 50%;
+  text-align: left;
+  margin: 0 auto;
+
+  font-size: 1.75em;
+}
+
+.button {
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+}
+
+.weather_icon {
+  display: block;
+  margin: 0 auto;
+}
+
+footer {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+@media screen and (min-width: 370px) and (max-width: 480px) {
+  .centered {
+    margin-left: -20%;
+  }
+}
+@media screen and (min-width: 660px) and (max-width: 750px) {
+  .centered {
+    margin-left: 10%;
+  }
+}
+@media screen and (min-width: 750px) and (max-width: 768px){
+  .centered {
+    margin-left: 15%;
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1000px){
+  .centered {
+    margin-left: 15%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .centered {
+    margin-left: 30%;
+  }
+}
+li {
+  color: darkblue;
+}

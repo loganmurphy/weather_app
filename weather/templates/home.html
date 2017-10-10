@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="display">
+  <h1>Weather By City</h1>
+   <form action='' method='POST'>
+     <div class="input form-group">
+       <input type="city" class="to_left input form-control" placeholder="Enter your city" required name="city">
+     </div>
+      <div>
+        <button type="submit" class="button btn btn-primary">Submit</button>
+      </div>
+   </form>
+ </div>
+{% endblock %}

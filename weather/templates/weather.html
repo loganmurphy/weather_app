@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="display containter">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <h1>Here's Your Weather for {{ city|capitalize }}</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <ul class="centered">
+        <li>Temp:&nbsp;{{weather.celcius()|round}}&#8451;</li>
+        <li>Pressure:&nbsp;{{weather.weather_data.main.pressure}}</li>
+        <li>Humidity:&nbsp;{{weather.weather_data.main.humidity}}</li>
+        <li>Weather:&nbsp;{{weather.weather_data.weather.0.main}}</li>
+      </ul>
+    </div>
+  </div>
+
+  {% if weather.weather_data.weather.0.main in ['Rain','Drizzle'] %}
+    <img class="weather_icon" src="/static/img/rain.png">
+  {% elif weather.weather_data.weather.0.main in ['Mist', 'Haze', 'Smoke'] %}
+    <img class="weather_icon" src="/static/img/fog.png">
+  {% elif weather.weather_data.weather.0.main == 'Clouds' %}
+    <img class="weather_icon" src="/static/img/clouds.png">
+  {% elif weather.weather_data.weather.0.main == 'Clear' %}
+    <img class="weather_icon" src="/static/img/clouds.png">
+  {% elif weather.weather_data.weather.0.main == 'Snow' %}
+    <img class="weather_icon" src="/static/img/clouds.snow">
+  {% elif weather.weather_data.weather.0.main == 'Storm' %}
+    <img class="weather_icon" src="/static/img/clouds.storm">
+  <!-- {% else %} -->
+  {% endif %}
+    <div>
+      <button type="link" class="button btn btn-primary" required name="history"><a href="/history/history?city={{ city }}">Last Five Reports</a></button>
+    </div>
+
+
+ </div>
+{% endblock %}
