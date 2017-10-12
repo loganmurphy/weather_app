@@ -29,6 +29,16 @@ class TemplateHandler(tornado.web.RequestHandler):
     template = ENV.get_template(tpl)
     self.write(template.render(**context))
 
+def api_call (city):
+    url = "http://api.openweathermap.org/data/2.5/weather"
+    querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
+    headers = {
+        'cache-control': "no-cache",
+        'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
+        }
+    response = requests.request("POST", url, headers=headers, params=querystring)
+    weather = Weather.create(city=city, weather_data=response.json())
+
 class MainHandler(TemplateHandler):
   def get (self):
     # render input form
@@ -41,47 +51,29 @@ class MainHandler(TemplateHandler):
         print(response.json())
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
-    # self.render_template('home.html', {})
+    self.render_template('home.html', {})
     city = response.json()['city']
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
-    self.render_template('weather.html', {'weather': weather, 'city': city})
+    # self.render_template('weather.html', {'weather': weather, 'city': city})
 
   def post (self):
-    #  Write a function for this.
     city_check = ['Houston', 'Taipei', 'San Francisco']
     for city in city_check:
-        url = "http://api.openweathermap.org/data/2.5/weather"
-        headers = {
-            'cache-control': "no-cache",
-            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-            }
-        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city }
-        response = requests.request("POST", url, headers=headers, params=querystring)
-        weather_update = Weather.create(city=city, weather_data=response.json())
-    print("Updated")
-
+        api_call (city)
     city = self.get_body_argument('city')
-    url = "http://api.openweathermap.org/data/2.5/weather"
     old = datetime.datetime.utcnow() - datetime.timedelta(minutes=15)
-
     try:
         weather = Weather.select().where(
           Weather.city == city,
           Weather.created >= old
          ).order_by(Weather.created.desc()).get()
         print('Got weather from database')
-
     except:
         print('Retrieving Weather with API')
-        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
-        headers = {
-            'cache-control': "no-cache",
-            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-            }
-        response = requests.request("POST", url, headers=headers, params=querystring)
-        weather = Weather.create(city=city, weather_data=response.json())
-    print(weather, weather.created)
+        api_call (city)
+    weather = Weather.select().where(Weather.city == city).get()
+    city = self.get_body_argument('city')
     self.render_template('weather.html', {'weather': weather, 'city': city})
 
 class PlotGraph(TemplateHandler):
