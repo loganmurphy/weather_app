@@ -43,7 +43,6 @@ h1, h2 {
   text-align: center;
   font-size: 1em;
   color: white;
-
 }
 
 .weather_icon {
@@ -51,16 +50,84 @@ h1, h2 {
   margin: 0 auto;
 }
 
+.graph {
+  display: block;
+  margin: 0 auto;
+}
+
 footer {
   margin-top: 1.5em;
+  margin-bottom: 1.5em;
   text-align: center;
 }
 
 li {
   color: darkblue;
+  list-style: none;
 }
 
-@media screen and (min-width: 370px) and (max-width: 480px) {
+@media screen and (max-width: 320px) {
+  .centered {
+    margin-left: -35%;
+  }
+  .button {
+    width: 100%;
+    margin-left: 5%;
+  }
+  .history {
+    margin-left: 58%;
+    width: 100%;
+  }
+  .pushed_down {
+    margin-top: 50%;
+  }
+  .pushed_down_more {
+    margin-top: 30%;
+  }
+}
+@media screen and (min-width: 330px) and (max-width: 360px) {
+  .centered {
+    margin-left: -25%;
+  }
+  .button {
+    width: 100%;
+    margin-left: 5%;
+  }
+  .history {
+    margin-left: 45%;
+    width: 100%;
+  }
+  .pushed_down {
+    margin-top: 50%;
+  }
+  .pushed_down_more {
+    margin-top: 45%;
+  }
+}
+
+@media screen and (min-width: 370px) and (max-width: 412px) {
+  .centered {
+    margin-left: -26%;
+  }
+  .button {
+    width: 100%;
+    margin-left: 0%;
+  }
+  .history {
+    margin-left: 40%;
+    width: 100%;
+  }
+  .graph {
+    margin-left: -5%;
+  }
+  .pushed_down {
+    margin-top: 50%;
+  }
+  .pushed_down_more {
+    margin-top: 45%;
+  }
+}
+@media screen and (min-width: 412px) and (max-width: 412px) {
   .centered {
     margin-left: -20%;
   }
@@ -68,39 +135,124 @@ li {
     width: 100%;
     margin-left: 0%;
   }
-}
-@media screen and (min-width: 640px) and (max-width: 736px) {
-  .centered {
-    margin-left: 15%;
+  .history {
+    margin-left: 36%;
+    width: 100%;
+  }
+  .graph {
+    margin-left: 3%;
+  }
+  .pushed_down {
+    margin-top: 50%;
+  }
+  .pushed_down_more {
+    margin-top: 45%;
   }
 }
-@media screen and (min-width: 736px) and (max-width: 768px){
+@media screen and (min-width: 413px) and (max-width: 500px) {
   .centered {
-    margin-left: 15%;
+    margin-left: -18%;
+  }
+  .button {
+    width: 100%;
+    margin-left: 0%;
+  }
+  .history {
+    margin-left: 36%;
+    width: 100%;
+  }
+  .graph {
+    margin-left: 3%;
+  }
+  .pushed_down {
+    margin-top: 50%;
+  }
+  .pushed_down_more {
+    margin-top: 40%;
   }
 }
-@media screen and (min-width: 767px) and (max-width: 1000px){
+@media screen and (min-width: 568px) and (max-width: 570px) {
   .centered {
-    margin-left: 15%;
+    margin-left: 0;
+  }
+  .history {
+    margin-left: 10%;
+    width: 100%;
+  }
+  .pushed_down_more {
+    margin-top: 10%;
+  }
+}
+@media screen and (min-width: 640px) and (max-width: 732px) {
+  .centered {
+    margin-left: 8%;
+  }
+  .history {
+    margin-left: 7%;
+    width: 100%;
+  }
+  .graph {
+    margin-left: -8%;
+  }
+  .pushed_down {
+    margin-top: 10%;
+  }
+  .pushed_down_more {
+    margin-top: 15%;
+  }
+  .shift {
+    margin-left: 5%;
+  }
+}
+@media screen and (min-width: 736px) and (max-width: 736px) {
+  .graph {
+    margin-left: -12%;
+  }
+}
+@media screen and (min-width: 732px) and (max-width: 768px){
+  .centered {
+    margin-left: 12%;
+  }
+  .pushed_down_more {
+    margin-top: 15%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .centered {
+    margin-left: 10%;
+  }
+  .pushed_down {
+    margin-top: 30%;
+  }
+  .pushed_down_more {
+    margin-top: 45%;
+  }
+  .pushed {
+    margin-top: 30%;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px){
+  .centered {
+    margin-left: 22%;
+  }
+  .pushed_down {
+    margin-top: 15%;
+  }
+  .pushed_down_more {
+    margin-top: 25%;
+  }
+  .pushed {
+    margin-top: 15%;
   }
 }
 @media screen and (min-width: 1366px) {
   .centered {
     margin-left: 30%;
   }
-}
-
-@media screen and (min-width: 568px) and (max-width: 570px) {
-  .centered {
-    margin-left: 5%;
+  .pushed_down {
+    margin-top: 20%;
   }
-}
-@media screen and (min-width: 320px) and (max-width: 480px) {
-  .centered {
-    margin-left: -25%;
-  }
-  button {
-    width: 100%;
-    margin-left: 5%;
+  .pushed_down_more {
+    margin-top: 15%;
   }
 }

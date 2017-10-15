@@ -1,4 +1,5 @@
 import os
+import boto3
 import datetime
 
 import tornado.ioloop
@@ -8,8 +9,6 @@ import tornado.log
 import matplotlib.pyplot as plot
 from PIL import Image
 import numpy as np
-
-import urllib
 
 import requests
 import json
@@ -83,12 +82,12 @@ class PlotGraph(TemplateHandler):
     print(city)
     weather = Weather.select().where(Weather.city == city).order_by(Weather.created.desc()).limit(5)
     your_city = Weather.city
-    im1 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_clear.png')
-    im2 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_clouds.png')
-    im3 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_fog.png')
-    im4 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_rain.png')
-    im5 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_snow.png')
-    im6 = Image.open('/Users/loganmurphy/desktop/weather_app/static/img/sm_storm.png')
+    im1 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_clear.png')
+    im2 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_clouds.png')
+    im3 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_fog.png')
+    im4 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_rain.png')
+    im5 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_snow.png')
+    im6 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_storm.png')
     weather_pic = ' '
     temp = []
     xs = [1, 2, 3, 4, 5]
