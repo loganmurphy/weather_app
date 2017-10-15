@@ -6,7 +6,7 @@ import tornado.ioloop
 import tornado.web
 import tornado.log
 
-import matplotlib.pyplot as plot
+# import matplotlib.pyplot as plot
 # from PIL import Image
 # import numpy as np
 
