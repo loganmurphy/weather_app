@@ -1,6 +1,6 @@
-import os
+# import os
 import boto3
-import datetime
+# import datetime
 
 import tornado.ioloop
 import tornado.web
@@ -17,23 +17,13 @@ import json
 from jinja2 import \
   Environment, PackageLoader, select_autoescape
 
-from models import Weather
+from models import Weather, datetime, os
 
 ENV = Environment(
   loader=PackageLoader('weather', 'templates'),
   autoescape=select_autoescape(['html', 'xml'])
 )
-import peewee
-from playhouse.db_url import connect
-from playhouse.postgres_ext import JSONField
 
-
-DB = connect(
-    os.environ.get(
-    'DATABASE_URL',
-    'postgres://localhost:5432/weather_appdb'
-    )
-)
 class TemplateHandler(tornado.web.RequestHandler):
   def render_template (self, tpl, context):
     template = ENV.get_template(tpl)
