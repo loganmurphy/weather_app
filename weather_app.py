@@ -73,7 +73,15 @@ class MainHandler(TemplateHandler):
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']
     for city in city_check:
-        api_call (city)
+        # api_call (city)
+        url = "http://api.openweathermap.org/data/2.5/weather"
+        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
+        headers = {
+            'cache-control': "no-cache",
+            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
+            }
+        response = requests.request("POST", url, headers=headers, params=querystring)
+        weather = Weather.create(city=city, weather_data=response.json())
     city = self.get_body_argument('city')
     old = datetime.datetime.utcnow() - datetime.timedelta(minutes=15)
     try:
@@ -84,7 +92,15 @@ class MainHandler(TemplateHandler):
         print('Got weather from database')
     except:
         print('Retrieving Weather with API')
-        api_call (city)
+        # api_call (city)
+        url = "http://api.openweathermap.org/data/2.5/weather"
+        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
+        headers = {
+            'cache-control': "no-cache",
+            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
+            }
+        response = requests.request("POST", url, headers=headers, params=querystring)
+        weather = Weather.create(city=city, weather_data=response.json())
     weather = Weather.select().where(Weather.city == city).get()
     city = self.get_body_argument('city')
     self.render_template('weather.html', {'weather': weather, 'city': city})
