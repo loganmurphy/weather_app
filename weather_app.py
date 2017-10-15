@@ -53,6 +53,7 @@ class MainHandler(TemplateHandler):
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
+    city = ''
     url = "http://api.openweathermap.org/data/2.5/weather"
     querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
     headers = {
@@ -61,6 +62,7 @@ class MainHandler(TemplateHandler):
         }
     response = requests.request("POST", url, headers=headers, params=querystring)
     weather = Weather.create(city=city, weather_data=response.json())
+
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
     # self.render_template('weather.html', {'weather': weather, 'city': city})
