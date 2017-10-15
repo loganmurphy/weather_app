@@ -6,9 +6,9 @@ import tornado.ioloop
 import tornado.web
 import tornado.log
 
-import matplotlib.pyplot as plot
-matplotlib.use('Agg')
-# from PIL import Image
+# import matplotlib.pyplot as plot
+# matplotlib.use('Agg')
+from PIL import Image
 import numpy as np
 
 import requests
