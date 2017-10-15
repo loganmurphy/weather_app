@@ -23,7 +23,12 @@ ENV = Environment(
   loader=PackageLoader('weather', 'templates'),
   autoescape=select_autoescape(['html', 'xml'])
 )
-
+DB = connect(
+    os.environ.get(
+    'DATABASE_URL',
+    'postgres://localhost:5432/weather_appdb'
+    )
+)
 class TemplateHandler(tornado.web.RequestHandler):
   def render_template (self, tpl, context):
     template = ENV.get_template(tpl)
