@@ -8,7 +8,7 @@ import tornado.log
 
 # import matplotlib.pyplot as plot
 # matplotlib.use('Agg')
-from PIL import Image
+# from PIL import Image
 import numpy as np
 
 import requests
