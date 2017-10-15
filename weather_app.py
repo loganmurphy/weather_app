@@ -36,7 +36,7 @@ def api_call (city):
         'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
         }
     response = requests.request("POST", url, headers=headers, params=querystring)
-    weather = Weather.create(city=city, weather_data=response.json())
+    # weather = Weather.create(city=city, weather_data=response.json())
 
 class MainHandler(TemplateHandler):
   def get (self):
