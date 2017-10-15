@@ -23,6 +23,11 @@ ENV = Environment(
   loader=PackageLoader('weather', 'templates'),
   autoescape=select_autoescape(['html', 'xml'])
 )
+import peewee
+from playhouse.db_url import connect
+from playhouse.postgres_ext import JSONField
+
+
 DB = connect(
     os.environ.get(
     'DATABASE_URL',
