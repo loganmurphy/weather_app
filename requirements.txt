@@ -6,4 +6,5 @@ peewee
 psycopg2
 matplotlib
 numpy
-playhouse
+dokku 0.4.x+
+docker 1.8.x
