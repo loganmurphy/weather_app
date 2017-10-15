@@ -53,8 +53,9 @@ class MainHandler(TemplateHandler):
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
+    api_call (city)
 
-    response = requests.request("POST", url, headers=headers, params=querystring)
+    # response = requests.request("POST", url, headers=headers, params=querystring)
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
     # self.render_template('weather.html', {'weather': weather, 'city': city})
