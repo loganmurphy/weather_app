@@ -1,6 +1,6 @@
-# import os
+import os
 import boto3
-# import datetime
+import datetime
 
 import tornado.ioloop
 import tornado.web
@@ -17,7 +17,7 @@ import json
 from jinja2 import \
   Environment, PackageLoader, select_autoescape
 
-from models import Weather, datetime, os
+from models import Weather
 
 ENV = Environment(
   loader=PackageLoader('weather', 'templates'),
