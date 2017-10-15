@@ -6,4 +6,3 @@ peewee
 psycopg2
 matplotlib
 numpy
-PIL
