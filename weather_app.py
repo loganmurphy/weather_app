@@ -23,6 +23,7 @@ ENV = Environment(
   loader=PackageLoader('weather', 'templates'),
   autoescape=select_autoescape(['html', 'xml'])
 )
+conn = psycopg2.connect("dbname=weather_app user=postgres password=xxxx port=5432")
 
 class TemplateHandler(tornado.web.RequestHandler):
   def render_template (self, tpl, context):
