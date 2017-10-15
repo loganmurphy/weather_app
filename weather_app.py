@@ -53,7 +53,7 @@ class MainHandler(TemplateHandler):
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
-    city = ''
+    # city = ''
     url = "http://api.openweathermap.org/data/2.5/weather"
     querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
     headers = {
