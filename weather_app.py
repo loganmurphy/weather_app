@@ -70,24 +70,24 @@ class MainHandler(TemplateHandler):
   #   print(city)
   #   # self.render_template('weather.html', {'weather': weather, 'city': city})
   #
-  # def post (self):
-  #   city_check = ['Houston', 'Taipei', 'San Francisco']
-  #   for city in city_check:
-  #       api_call (city)
-  #   city = self.get_body_argument('city')
-  #   old = datetime.datetime.utcnow() - datetime.timedelta(minutes=15)
-  #   try:
-  #       weather = Weather.select().where(
-  #         Weather.city == city,
-  #         Weather.created >= old
-  #        ).order_by(Weather.created.desc()).get()
-  #       print('Got weather from database')
-  #   except:
-  #       print('Retrieving Weather with API')
-  #       api_call (city)
-  #   weather = Weather.select().where(Weather.city == city).get()
-  #   city = self.get_body_argument('city')
-  #   self.render_template('weather.html', {'weather': weather, 'city': city})
+  def post (self):
+    city_check = ['Houston', 'Taipei', 'San Francisco']
+    for city in city_check:
+        api_call (city)
+    city = self.get_body_argument('city')
+    old = datetime.datetime.utcnow() - datetime.timedelta(minutes=15)
+    try:
+        weather = Weather.select().where(
+          Weather.city == city,
+          Weather.created >= old
+         ).order_by(Weather.created.desc()).get()
+        print('Got weather from database')
+    except:
+        print('Retrieving Weather with API')
+        api_call (city)
+    weather = Weather.select().where(Weather.city == city).get()
+    city = self.get_body_argument('city')
+    self.render_template('weather.html', {'weather': weather, 'city': city})
 
 class PlotGraph(TemplateHandler):
   def get (self, history):
