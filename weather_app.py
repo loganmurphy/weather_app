@@ -7,8 +7,8 @@ import tornado.web
 import tornado.log
 
 # import matplotlib.pyplot as plot
-# from PIL import Image
-# import numpy as np
+from PIL import Image
+import numpy as np
 
 import requests
 import json
