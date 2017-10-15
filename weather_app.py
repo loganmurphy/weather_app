@@ -48,17 +48,13 @@ class MainHandler(TemplateHandler):
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
         print(response.json())
+        city = response.json()['city']
+
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
-    # headers = {
-    #     'cache-control': "no-cache",
-    #     'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-    #     }
-    # response = requests.request("POST", url, headers=headers, params=querystring)
-    city = self.get_body_argument('city')
-    api_call (city)
-    city = response.json()['city']
+
+    response = requests.request("POST", url, headers=headers, params=querystring)
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
     # self.render_template('weather.html', {'weather': weather, 'city': city})
