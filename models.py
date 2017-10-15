@@ -5,6 +5,8 @@ import peewee
 from playhouse.db_url import connect
 from playhouse.postgres_ext import JSONField
 
+conn = psycopg2.connect("dbname=weather_app user=postgres password=xxxx port=5432")
+
 DB = connect(
     os.environ.get(
     'DATABASE_URL',
