@@ -6,4 +6,4 @@ peewee
 psycopg2
 matplotlib
 numpy
-docker 1.8.x
+docker 1.8
