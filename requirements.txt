@@ -6,5 +6,4 @@ peewee
 psycopg2
 matplotlib
 numpy
-playhouse.db_url
-playhouse.postgres_ext
+playhouse
