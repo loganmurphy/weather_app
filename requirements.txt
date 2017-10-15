@@ -5,4 +5,5 @@ requests
 peewee
 psycopg2
 matplotlib
-tkinter
+numpy
+PIL
