@@ -50,8 +50,8 @@ class MainHandler(TemplateHandler):
         response = requests.get(url)
         print(response.json())
         city = response.json()['city']
-        # return response, city
-        return requests.get(url), response.json()['city']
+        return response, city
+        # return requests.get(url), response.json()['city']
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
