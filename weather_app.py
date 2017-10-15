@@ -25,7 +25,7 @@ ENV = Environment(
 
 DATABASE_URL = os.environ.get(
   'DATABASE_URL',
-  'postgres://postgres:postgres@localhost:5432/weather_app'
+  'postgres://localhost:5432/weather_app'
 )
 
 class TemplateHandler(tornado.web.RequestHandler):
