@@ -6,9 +6,8 @@ import tornado.ioloop
 import tornado.web
 import tornado.log
 
-# import matplotlib.pyplot as plot
-# matplotlib.use('Agg')
-# from PIL import Image
+import matplotlib.pyplot as plot
+from PIL import Image
 import numpy as np
 
 import requests
@@ -44,20 +43,20 @@ class MainHandler(TemplateHandler):
     # render input form
     x_real_ip = self.request.headers.get("X-Real-IP")
     remote_ip = x_real_ip or self.request.remote_ip
-    print(remote_ip)
+    print(remote_ip) s
     if remote_ip == '::1':
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
         print(response.json())
         city = response.json()['city']
         return response, city
-    
+
         # return requests.get(url), response.json()['city']
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
     response = requests.get(url)
-    city = response.json()['city']
+    city = response.json()
     url = "http://api.openweathermap.org/data/2.5/weather"
     querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
     headers = {
@@ -66,7 +65,6 @@ class MainHandler(TemplateHandler):
         }
     response = requests.request("POST", url, headers=headers, params=querystring)
     weather = Weather.create(city=city, weather_data=response.json())
-
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
     # self.render_template('weather.html', {'weather': weather, 'city': city})
