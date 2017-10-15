@@ -43,7 +43,7 @@ class MainHandler(TemplateHandler):
     # render input form
     x_real_ip = self.request.headers.get("X-Real-IP")
     remote_ip = x_real_ip or self.request.remote_ip
-    print(remote_ip) s
+    print(remote_ip)
     if remote_ip == '::1':
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
