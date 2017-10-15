@@ -55,20 +55,20 @@ class MainHandler(TemplateHandler):
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
-  #   response = requests.get(url)
-  #   city = response.json()['city']
-  #   url = "http://api.openweathermap.org/data/2.5/weather"
-  #   querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
-  #   headers = {
-  #       'cache-control': "no-cache",
-  #       'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-  #       }
-  #   response = requests.request("POST", url, headers=headers, params=querystring)
-  #   weather = Weather.create(city=city, weather_data=response.json())
-  #
-  #   weather = Weather.select().where(Weather.city == city).get()
-  #   print(city)
-  #   # self.render_template('weather.html', {'weather': weather, 'city': city})
+    response = requests.get(url)
+    city = response.json()['city']
+    url = "http://api.openweathermap.org/data/2.5/weather"
+    querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
+    headers = {
+        'cache-control': "no-cache",
+        'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
+        }
+    response = requests.request("POST", url, headers=headers, params=querystring)
+    weather = Weather.create(city=city, weather_data=response.json())
+
+    weather = Weather.select().where(Weather.city == city).get()
+    print(city)
+    # self.render_template('weather.html', {'weather': weather, 'city': city})
   #
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']
@@ -165,6 +165,6 @@ def make_app():
 if __name__ == '__main__':
   tornado.log.enable_pretty_logging()
   app = make_app()
-  app.listen(int(os.environ.get('PORT', '9999')))
+  app.listen(int(os.environ.get('PORT', '5432')))
   print("All systems are go!")
   tornado.ioloop.IOLoop.current().start()
