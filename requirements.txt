@@ -6,5 +6,4 @@ peewee
 psycopg2
 matplotlib
 numpy
-dokku 0.4.x+
 docker 1.8.x
