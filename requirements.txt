@@ -5,3 +5,4 @@ requests
 peewee
 psycopg2
 matplotlib
+_tkinter
