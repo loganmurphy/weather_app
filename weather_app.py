@@ -6,10 +6,6 @@ import tornado.ioloop
 import tornado.web
 import tornado.log
 
-# import matplotlib.pyplot as plot
-# from PIL import Image
-# import numpy as np
-
 import requests
 import json
 
@@ -40,27 +36,25 @@ def api_call (city):
 
 class MainHandler(TemplateHandler):
   def get (self):
-    # render input form
     x_real_ip = self.request.headers.get("X-Real-IP")
     remote_ip = x_real_ip or self.request.remote_ip
     print(remote_ip)
     if remote_ip == '::1':
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
-        # print(response.json())
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
         response = requests.get(url)
         print(response.json())
-    self.render_template('home.html', {})
-    # print(response.json())
-    # if response.json()['bogon'] == True:
-    #     self.render_template('home.html', {})
-    # else:
-    #     city = response.json()['city']
-    #     weather = Weather.select().where(Weather.city == city).get()
-    #     print(city)
-        # self.render_template('weather.html', {'weather': weather, 'city': city, 'error': False})
+    # self.render_template('home.html', {})
+    print(response.json())
+    if response.json()['bogon'] == True:
+        self.render_template('home.html', {})
+    else:
+        city = response.json()['city']
+        weather = Weather.select().where(Weather.city == city).get()
+        print(city)
+        self.render_template('weather.html', {'weather': weather, 'city': city, 'error': False})
 
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']
@@ -87,50 +81,7 @@ class PlotGraph(TemplateHandler):
     print(city)
     weather = Weather.select().where(Weather.city == city).order_by(Weather.created.desc()).limit(5)
     your_city = Weather.city
-
     self.render_template('history.html', {'data': weather})
-
-    # im1 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_clear.png')
-    # im2 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_clouds.png')
-    # im3 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_fog.png')
-    # im4 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_rain.png')
-    # im5 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_snow.png')
-    # im6 = Image.open('/Users/loganmurphy/desktop/digitalcrafts/weather_app/static/img/sm_storm.png')
-    # weather_pic = ' '
-    # temp = []
-    # xs = [1, 2, 3, 4, 5]
-    #
-    # i = 0
-    # while i < 5:
-    #   temp_in_celcius = (weather[i].weather_data['main']['temp'] - 273.15)
-    #   temp.append(temp_in_celcius)
-    #   if weather[i].weather_data['weather'][0]['main'] in ['Rain','Drizzle']:
-    #       weather_pic = im4
-    #   elif weather[i].weather_data['weather'][0]['main'] in ['Mist', 'Haze', 'Smoke']:
-    #       weather_pic = im3
-    #   elif weather[i].weather_data['weather'][0]['main'] == 'Clouds':
-    #       weather_pic = im2
-    #   elif weather[i].weather_data['weather'][0]['main'] == 'Clear':
-    #       weather_pic = im1
-    #   elif weather[i].weather_data['weather'][0]['main'] == 'Snow':
-    #       weather_pic = im5
-    #   elif weather[i].weather_data['weather'][0]['main'] == 'Storm':
-    #       weather_pic = im6
-    #   i += 1
-    #
-    # fig = plot.figure()
-    # fig.figimage(weather_pic, 122.5, fig.bbox.ymin + 10)
-    # fig.figimage(weather_pic, 215.5, fig.bbox.ymin + 10)
-    # fig.figimage(weather_pic, 310.5, fig.bbox.ymin + 10)
-    # fig.figimage(weather_pic, 402.5, fig.bbox.ymin + 10)
-    # fig.figimage(weather_pic, 500.5, fig.bbox.ymin + 10)
-    # plot.bar(xs, temp)
-    # plot.ylabel('Temperature in °C')
-    # plot.savefig('static/img/history.png', dpi=None, facecolor='w', edgecolor='w',
-    #     orientation='portrait', papertype=None, format='png',
-    #     transparent=False, bbox_inches=None, pad_inches=0.1,
-    #     frameon=None)
-    # print('Saved it!')
 
 def make_app():
   return tornado.web.Application([
