@@ -10,6 +10,8 @@ import matplotlib.pyplot as plot
 from PIL import Image
 import numpy as np
 
+import _tkinter
+
 import requests
 import json
 
