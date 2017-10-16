@@ -55,7 +55,7 @@ class MainHandler(TemplateHandler):
     # self.render_template('home.html', {})
     print(response.json())
     if response.json()['bogon'] == True:
-        self.render_template('weather.html', {'error': True, 'weather': None, 'city': None})
+        self.render_template('home.html', {})
     else:
         city = response.json()['city']
         weather = Weather.select().where(Weather.city == city).get()
