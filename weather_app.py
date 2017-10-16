@@ -54,10 +54,13 @@ class MainHandler(TemplateHandler):
         print(response.json())
     # self.render_template('home.html', {})
     print(response.json())
-    city = response.json()['city']
-    weather = Weather.select().where(Weather.city == city).get()
-    print(city)
-    self.render_template('weather.html', {'weather': weather, 'city': city})
+    if response.json()['bogon'] == 'true':
+        self.render_template('weather.html', {'error': True, 'weather': None, 'city': None})
+    else:
+        city = response.json()['city']
+        weather = Weather.select().where(Weather.city == city).get()
+        print(city)
+        self.render_template('weather.html', {'weather': weather, 'city': city, 'error': False})
 
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']

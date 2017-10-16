@@ -2,10 +2,14 @@
 
 {% block content %}
 
+{% if error %}
+<div> ERROR </div>
 
+{% else %}
 <div class="display containter">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
+
       <h1 class="big pushed">Here's Your Weather for {{ city|capitalize }}</h1>
     {% if weather.weather_data.weather.0.main in ['Rain','Drizzle'] %}
       <img class="weather_icon" src="/static/img/rain.png">
@@ -40,4 +44,5 @@
 
 
  </div>
+ {% endif %}
 {% endblock %}
