@@ -8,7 +8,7 @@ from playhouse.postgres_ext import JSONField
 
 DB = connect(
     os.environ.get(
-    'DATABASE_URL',
+    'DOKKU_POSTGRES_GRAY_URL',
     'postgres://localhost:5432/weather_app'
     )
 )
