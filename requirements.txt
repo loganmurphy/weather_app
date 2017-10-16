@@ -11,7 +11,6 @@ tornado==4.5.2
 urllib3==1.22
 urlopen==1.0.0
 argparse==1.2.1
-distribute==0.6.24
 gunicorn==17.5
 wsgiref==0.1.2
 scipy==0.11.0
