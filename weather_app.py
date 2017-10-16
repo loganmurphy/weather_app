@@ -47,15 +47,17 @@ class MainHandler(TemplateHandler):
     if remote_ip == '::1':
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
-        print(response.json())
+        # print(response.json())
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
         response = requests.get(url)
-    self.render_template('home.html', {})
+        print(response.json())
+    # self.render_template('home.html', {})
+    print(response.json())
     city = response.json()['city']
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
-    # self.render_template('weather.html', {'weather': weather, 'city': city})
+    self.render_template('weather.html', {'weather': weather, 'city': city})
 
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']
