@@ -10,8 +10,6 @@ import matplotlib.pyplot as plot
 from PIL import Image
 import numpy as np
 
-import _tkinter
-
 import requests
 import json
 
@@ -50,39 +48,18 @@ class MainHandler(TemplateHandler):
         url = 'https://ipinfo.io/json'
         response = requests.get(url)
         print(response.json())
-        city = response.json()['city']
-        return response, city
-
-        # return requests.get(url), response.json()['city']
     else:
         url = 'https://ipinfo.io/{}/json'.format(remote_ip)
     self.render_template('home.html', {})
-    response = requests.get(url)
-    city = response.json()
-    url = "http://api.openweathermap.org/data/2.5/weather"
-    querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
-    headers = {
-        'cache-control': "no-cache",
-        'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-        }
-    response = requests.request("POST", url, headers=headers, params=querystring)
-    weather = Weather.create(city=city, weather_data=response.json())
+    city = response.json()['city']
     weather = Weather.select().where(Weather.city == city).get()
     print(city)
     # self.render_template('weather.html', {'weather': weather, 'city': city})
-  #
+
   def post (self):
     city_check = ['Houston', 'Taipei', 'San Francisco']
     for city in city_check:
-        # api_call (city)
-        url = "http://api.openweathermap.org/data/2.5/weather"
-        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
-        headers = {
-            'cache-control': "no-cache",
-            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-            }
-        response = requests.request("POST", url, headers=headers, params=querystring)
-        weather = Weather.create(city=city, weather_data=response.json())
+        api_call (city)
     city = self.get_body_argument('city')
     old = datetime.datetime.utcnow() - datetime.timedelta(minutes=15)
     try:
@@ -93,15 +70,7 @@ class MainHandler(TemplateHandler):
         print('Got weather from database')
     except:
         print('Retrieving Weather with API')
-        # api_call (city)
-        url = "http://api.openweathermap.org/data/2.5/weather"
-        querystring = {"APPID":"5fadb7bdf915f1e0ef22880fb806b684","q": city}
-        headers = {
-            'cache-control': "no-cache",
-            'postman-token': "fe66220c-7377-25b8-1688-3c5552c5eaef"
-            }
-        response = requests.request("POST", url, headers=headers, params=querystring)
-        weather = Weather.create(city=city, weather_data=response.json())
+        api_call (city)
     weather = Weather.select().where(Weather.city == city).get()
     city = self.get_body_argument('city')
     self.render_template('weather.html', {'weather': weather, 'city': city})
@@ -166,6 +135,6 @@ def make_app():
 if __name__ == '__main__':
   tornado.log.enable_pretty_logging()
   app = make_app()
-  app.listen(int(os.environ.get('PORT', '5432')))
+  app.listen(int(os.environ.get('PORT', '9999')))
   print("All systems are go!")
   tornado.ioloop.IOLoop.current().start()
