@@ -166,7 +166,7 @@ li {
 
 @media screen and (min-width: 640px) and (max-width: 732px) {
   .centered {
-    margin-left: 8%;
+    margin-left: 10%;
   }
   .pushed_down {
     margin-top: 10%;
@@ -181,7 +181,7 @@ li {
 
 @media screen and (min-width: 732px) and (max-width: 768px){
   .centered {
-    margin-left: 12%;
+    margin-left: 14%;
   }
   .pushed_down_more {
     margin-top: 15%;
