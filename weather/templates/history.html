@@ -18,7 +18,7 @@
               data: {
                   labels: ["1", "2", "3", "4", "5"],
                   datasets: [{
-                      label: 'Temp',
+                      label: 'Temp in &#8451;',
                       data: [
                         {% for weather in data %}
                         {{weather.celcius()|round}},
